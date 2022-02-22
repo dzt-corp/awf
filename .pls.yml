@@ -1,0 +1,22 @@
+node_specs:
+  - name: go.mod
+    icon: package
+  - name: go.sum
+    icon: lock
+    importance: -1
+    collapse:
+      name: go.mod
+  - name: dist
+    importance: -1
+    icon: share
+
+  - extension: go
+    icon: go
+    importance: 1
+    color: "#00ADD8"
+nerd_icons:
+  go: "\ufcd1"
+  share: "\uf14d"
+emoji_icons:
+  go: 🦫
+  share: "🎁"
