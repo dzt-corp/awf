@@ -1,0 +1,37 @@
+name: Build image
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: The tag to assign to the built image
+        required: true
+
+jobs:
+  build-image:
+    name: Build image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v1
+        with:
+          install: true
+
+      - name: Build image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: false
+          tags:
+          cache-from: type=gha,scope=awf
+          cache-to: type=gha,scope=awf
+          outputs: type=docker,dest=/tmp/awf.tar
+
+      - name: Upload image `awf`
+        uses: actions/upload-artifact@v2
+        with:
+          name: awf
+          path: /tmp/awf.tar
