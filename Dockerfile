@@ -36,7 +36,10 @@ RUN go build -ldflags="-w -s" -o dist/server main.go
 # AWF #
 #######
 
-FROM alpine as awf
+FROM alpine:latest as awf
+
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
 
 # Copy `audiowaveform` dependencies.
 COPY --from=bbc /deps /
