@@ -17,8 +17,8 @@ watch:
 	$(go env GOPATH)/bin/reflex -d none -s -r '\.go$$' just run
 
 # Build and tag the `awf` Docker image.
-docker-build:
-    docker build -t awf .
+docker-build tag="latest" name="awf":
+    docker build -t {{ name }}:{{ tag }} .
 
 # Run the compiled `awf` server as a Docker container.
 docker-run cmd="":
